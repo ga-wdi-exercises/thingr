@@ -7,3 +7,5 @@ var ThingSchema = {
 
 mongoose.model("Thing", ThingSchema);
 mongoose.connect("mongodb://localhost/thingr");
+
+module.exports = mongoose;
