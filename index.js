@@ -13,10 +13,11 @@ app.engine(".hbs", hbs({
   defaultLayout:  "layout-main"
 }));
 app.get("/", function(req, res){
-  // Thing.find().then(function(response){
-  //   res.json(response);
-  // });
-  res.render("things-index");
+  Thing.find().then(function(response){
+    res.render("things-index", {
+      things: response
+    });
+  });
 });
 
 app.listen(3002, function(){
