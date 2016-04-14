@@ -12,10 +12,19 @@ app.engine(".hbs", hbs({
   layoutsDir:     "views/",
   defaultLayout:  "layout-main"
 }));
+
 app.get("/", function(req, res){
   Thing.find().then(function(response){
     res.render("things-index", {
       things: response
+    });
+  });
+});
+
+app.get("/:name", function(req, res){
+  Thing.findOne(req.params).then(function(response){
+    res.render("things-show", {
+      thing: response
     });
   });
 });

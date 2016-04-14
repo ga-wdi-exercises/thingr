@@ -3,7 +3,7 @@
 <ol>
 {{#each things as |thing|}}
   <li>
-    <h3>{{thing.name}}</h3>
+    <h3><a href="/{{thing.name}}">{{thing.name}}</a></h3>
     <p>{{thing.description}}</p>
   </li>
 {{/each}}
