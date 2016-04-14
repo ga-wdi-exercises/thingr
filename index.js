@@ -1,10 +1,12 @@
 var express   = require("express");
 var hbs       = require("express-handlebars");
+var parser    = require("body-parser");
 var mongoose  = require("./db/connection");
 var app       = express();
 
 var Thing     = mongoose.model("Thing");
 
+app.use(parser.urlencoded({extended: true}));
 app.set("view engine", "hbs");
 app.engine(".hbs", hbs({
   extname:        ".hbs",
@@ -26,6 +28,12 @@ app.get("/:name", function(req, res){
     res.render("things-show", {
       thing: response
     });
+  });
+});
+
+app.post("/:name", function(req, res){
+  Thing.findOneAndUpdate(req.params, req.body.thing, {new: true}).then(function(response){
+    res.redirect("/" + response.name);
   });
 });
 
